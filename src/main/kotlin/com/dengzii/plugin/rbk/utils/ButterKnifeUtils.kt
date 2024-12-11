@@ -44,11 +44,11 @@ object ButterKnifeUtils {
                     continue
                 }
                 val info = BindInfo(
-                        viewClass = field.type.canonicalText,
-                        idResExpr = viewIdExpr.text,
-                        filedName = (field.nameIdentifier as PsiIdentifierImpl).text,
-                        bindAnnotation = annotation,
-                        type = BindType.get(annotation)
+                    viewClass = field.type.canonicalText,
+                    idResExpr = viewIdExpr.text,
+                    filedName = (field.nameIdentifier as PsiIdentifierImpl).text,
+                    bindAnnotation = annotation,
+                    type = BindType.get(annotation)
                 )
                 info.optional = optional
                 ret.add(info)
@@ -78,12 +78,12 @@ object ButterKnifeUtils {
                     }
                     viewIdExprs.forEach {
                         val info = BindInfo(
-                                viewClass = "android.view.View",
-                                idResExpr = it,
-                                bindAnnotation = annotation,
-                                type = BindType.get(annotation),
-                                isEventBind = true,
-                                bindMethod = method
+                            viewClass = "android.view.View",
+                            idResExpr = it,
+                            bindAnnotation = annotation,
+                            type = BindType.get(annotation),
+                            isEventBind = true,
+                            bindMethod = method
                         )
                         ret.add(info)
                     }
@@ -96,7 +96,7 @@ object ButterKnifeUtils {
     fun isImportedButterKnife(psiFile: PsiFile): Boolean {
         var ret = false
         psiFile.acceptElement {
-            if (it is PsiImportList && ! ret) {
+            if (it is PsiImportList && !ret) {
                 ret = it.allImportStatements.filter { i ->
                     i.text.contains("butterknife.")
                 }.isNotEmpty()

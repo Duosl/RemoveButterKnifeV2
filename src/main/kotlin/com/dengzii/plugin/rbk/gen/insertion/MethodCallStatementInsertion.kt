@@ -4,8 +4,8 @@ import com.intellij.psi.*
 import com.jetbrains.rd.util.printlnError
 
 class MethodCallStatementInsertion(
-        private val place: InsertPlace,
-        private val predicate: InsertPredicate
+    private val place: InsertPlace,
+    private val predicate: InsertPredicate
 ) : Insertion {
 
     var inserted = false
@@ -17,8 +17,9 @@ class MethodCallStatementInsertion(
 
     companion object {
 
-        fun create(place: InsertPlace,
-                   predicate: (target: PsiElement, psiMethod: PsiMethod) -> Boolean
+        fun create(
+            place: InsertPlace,
+            predicate: (target: PsiElement, psiMethod: PsiMethod) -> Boolean
         ): MethodCallStatementInsertion {
             return MethodCallStatementInsertion(place, object : InsertPredicate {
                 override fun insert(target: PsiElement, psiMethod: PsiMethod): Boolean {
@@ -32,6 +33,7 @@ class MethodCallStatementInsertion(
                 val methods = method.map {
                     if ("." in it) it else ".".plus(it)
                 }
+
                 override fun insert(target: PsiElement, psiMethod: PsiMethod): Boolean {
                     val clazzName = psiMethod.containingClass?.qualifiedName.orEmpty()
                     val m = "${clazzName}.${psiMethod.name}"
@@ -65,12 +67,15 @@ class MethodCallStatementInsertion(
                         InsertPlace.BEFORE -> {
                             target.addBefore(insertion, element)
                         }
+
                         InsertPlace.AFTER -> {
                             target.addAfter(insertion, element)
                         }
+
                         InsertPlace.REPLACE -> {
                             element.replace(insertion)
                         }
+
                         else -> {
                             throw UnsupportedOperationException("Cannot insert $place to method.")
                         }
@@ -84,8 +89,10 @@ class MethodCallStatementInsertion(
         })
     }
 
-    private fun visitMethodCallStatement(origin: PsiElement, psiMethodCallExpression: PsiMethodCallExpression,
-                                         target: PsiElement, insertion: PsiElement) {
+    private fun visitMethodCallStatement(
+        origin: PsiElement, psiMethodCallExpression: PsiMethodCallExpression,
+        target: PsiElement, insertion: PsiElement
+    ) {
         val resolvedMethod = psiMethodCallExpression.resolveMethod()
         if (resolvedMethod == null) {
             printlnError("can not resolve method: $psiMethodCallExpression")
@@ -100,12 +107,15 @@ class MethodCallStatementInsertion(
             InsertPlace.BEFORE -> {
                 target.addBefore(insertion, origin)
             }
+
             InsertPlace.AFTER -> {
                 target.addAfter(insertion, origin)
             }
+
             InsertPlace.REPLACE -> {
                 origin.replace(insertion)
             }
+
             else -> {
                 throw UnsupportedOperationException("Cannot insert $place to method.")
             }

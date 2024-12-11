@@ -11,14 +11,14 @@ import com.intellij.util.ThrowableRunnable
  * @author https://github.com/dengzii
  */
 class CodeWriter private constructor(
-        private val psiClass: PsiClass,
-        private val bindInfos: List<BindInfo>
+    private val psiClass: PsiClass,
+    private val bindInfos: List<BindInfo>
 ) : ThrowableRunnable<RuntimeException?> {
 
     companion object {
         fun run(psiClass: PsiClass, bindInfos: List<BindInfo>) {
             WriteCommandAction.writeCommandAction(psiClass.project)
-                    .run(CodeWriter(psiClass, bindInfos))
+                .run(CodeWriter(psiClass, bindInfos))
         }
     }
 

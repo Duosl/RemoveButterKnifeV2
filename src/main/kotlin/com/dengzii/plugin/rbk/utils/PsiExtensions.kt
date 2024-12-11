@@ -48,7 +48,7 @@ fun PsiCodeBlock.addLast(element: PsiElement) {
     addAfter(element, lastBodyElement)
 }
 
-fun PsiCodeBlock.addFirst(element: PsiElement){
+fun PsiCodeBlock.addFirst(element: PsiElement) {
     addBefore(element, firstBodyElement)
 }
 

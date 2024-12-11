@@ -87,7 +87,10 @@ class JavaCase : BaseCase() {
             break
         }
         if (invokerMethodBody == null) {
-            NotificationUtils.showError("Class ${psiClass.qualifiedName} does not contain method: $insertToMethod", "Error")
+            NotificationUtils.showError(
+                "Class ${psiClass.qualifiedName} does not contain method: $insertToMethod",
+                "Error"
+            )
             throw NoSuchMethodError("Method $insertToMethod not found in class ${psiClass.qualifiedName}.")
         }
 
@@ -126,14 +129,17 @@ class JavaCase : BaseCase() {
                         || psiClass.isExtendsFrom(Config.PsiTypes.androidDialog) -> {
                     factory.createStatementFromText("${bindViewMethodName}(getWindow().getDecorView());\n", null)
                 }
+
                 psiClass.isExtendsFrom(Config.PsiTypes.androidFragment)
                         || psiClass.isExtendsFrom(Config.PsiTypes.androidXFragment) -> {
                     todo = true
                     factory.createStatementFromText("${bindViewMethodName}(null);\n", null)
                 }
+
                 psiClass.isExtendsFrom(Config.PsiTypes.androidView) -> {
                     factory.createStatementFromText("${bindViewMethodName}(this);\n", null)
                 }
+
                 else -> {
                     todo = true
                     factory.createStatementFromText("${bindViewMethodName}(null);\n", null)
@@ -144,7 +150,10 @@ class JavaCase : BaseCase() {
                 if (methodExpressionMap.containsKey(m)) {
                     val methodCallExpressions = methodExpressionMap[m]!!.first()
                     if (todo) {
-                        val ann = factory.createCommentFromText("// TODO RemoveButterKnife Plugin: specify the source view", null)
+                        val ann = factory.createCommentFromText(
+                            "// TODO RemoveButterKnife Plugin: specify the source view",
+                            null
+                        )
                         invokerMethodBody.addAfter(ann, methodCallExpressions.parent)
                     }
                     invokerMethodBody.addAfter(callStatement, methodCallExpressions.parent)
@@ -154,16 +163,22 @@ class JavaCase : BaseCase() {
             // if no specified call statement found, insert to the last line of method.
             if (!inserted) {
 
-                if (Config.insertCallBindViewToFirstLine){
+                if (Config.insertCallBindViewToFirstLine) {
                     invokerMethodBody.addFirst(callStatement)
                     if (todo) {
-                        val ann = factory.createCommentFromText("// TODO RemoveButterKnife Plugin: specify the source view", null)
+                        val ann = factory.createCommentFromText(
+                            "// TODO RemoveButterKnife Plugin: specify the source view",
+                            null
+                        )
                         invokerMethodBody.addFirst(ann)
                     }
-                }else {
+                } else {
                     invokerMethodBody.addLast(callStatement)
                     if (todo) {
-                        val ann = factory.createCommentFromText("// TODO RemoveButterKnife Plugin: specify the source view", null)
+                        val ann = factory.createCommentFromText(
+                            "// TODO RemoveButterKnife Plugin: specify the source view",
+                            null
+                        )
                         invokerMethodBody.addLast(ann)
                     }
                 }
@@ -198,6 +213,7 @@ class JavaCase : BaseCase() {
                 """.trimIndent()
                 factory.createStatementFromText(statement, null)
             }
+
             BindType.OnLongClick -> {
                 val statement = """
                     ${bindInfo.filedName}.setOnLongClickListener(v -> {
@@ -206,6 +222,7 @@ class JavaCase : BaseCase() {
                 """.trimIndent()
                 factory.createStatementFromText(statement, null)
             }
+
             else -> {
                 // TODO add more event listener support.
                 null
@@ -303,17 +320,20 @@ class JavaCase : BaseCase() {
         return psiField
     }
 
+    /**
+     * 生成 bindView(View bindSource) 方法签名
+     */
     private fun insertBindResourceMethod(psiClass: PsiClass): PsiMethod {
         var ret: PsiMethod? = psiClass.findMethodsByName(Config.methodNameBindView, false).firstOrNull()
         if (ret == null) {
-            ret = factory.createMethod(Config.methodNameBindView, PsiType.VOID)
+            ret = factory.createMethod(Config.methodNameBindView, PsiTypes.voidType())
             ret.modifierList.setModifierProperty(PsiModifier.PRIVATE, true)
             ret = psiClass.add(ret) as PsiMethod
         }
         val paramBindView = ret.parameterList.parameters.filter {
             (it.nameIdentifier as PsiIdentifierImpl).text == paramNameBindSourceView
         }
-        if (paramBindView.isNullOrEmpty()) {
+        if (paramBindView.isEmpty()) {
             ret.parameterList.add(factory.createParameter(paramNameBindSourceView, Config.PsiTypes.androidView))
         }
         return ret
@@ -329,9 +349,9 @@ class JavaCase : BaseCase() {
             return
         }
         val resourceExpression = statementTemplate
-                .replace("%{SOURCE}", paramNameBindSourceView)
-                .replace("%{RES_ID}", bindInfo.idResExpr)
-                .replace("%{THEME}", "${paramNameBindSourceView}.getContext().getTheme()")
+            .replace("%{SOURCE}", paramNameBindSourceView)
+            .replace("%{RES_ID}", bindInfo.idResExpr)
+            .replace("%{THEME}", "${paramNameBindSourceView}.getContext().getTheme()")
 
         val bindStatement = "%s = %s;".format(bindInfo.filedName, resourceExpression)
         if (bindMethodBody.text.contains(bindStatement)) {
@@ -347,7 +367,9 @@ class JavaCase : BaseCase() {
 
     companion object {
         private const val paramNameBindSourceView = "bindSource"
-        private val codeFormatter = CodeFormatterFacade(CodeStyleSettings.getDefaults(),
-                Language.findLanguageByID("JAVA"), false)
+        private val codeFormatter = CodeFormatterFacade(
+            CodeStyleSettings.getDefaults(),
+            Language.findLanguageByID("JAVA"), false
+        )
     }
 }

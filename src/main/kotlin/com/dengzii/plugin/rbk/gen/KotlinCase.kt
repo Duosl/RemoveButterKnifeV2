@@ -48,11 +48,13 @@ class KotlinCase : BaseCase() {
     private fun insertViewField(bindInfo: BindInfo, ktPsiFactory: KtPsiFactory, ktClass: KtClass?) {
         val body = ktClass!!.body
         val lBrace = body!!.lBrace
-        val lazyViewProperty = String.format(STATEMENT_LAZY_INIT_VIEW,
-                MODIFIER_INIT_VIEW_PROPERTY,
-                bindInfo.filedName,
-                bindInfo.viewClass,
-                bindInfo.idResExpr)
+        val lazyViewProperty = String.format(
+            STATEMENT_LAZY_INIT_VIEW,
+            MODIFIER_INIT_VIEW_PROPERTY,
+            bindInfo.filedName,
+            bindInfo.viewClass,
+            bindInfo.idResExpr
+        )
         val ktProperty = ktPsiFactory.createProperty(lazyViewProperty)
         body.addAfter(ktProperty, lBrace)
     }

@@ -23,17 +23,17 @@ object Config {
     var insertCallBindViewMethodAfterCallMethod = mutableListOf("setContentView", "inflate")
 
     var resBindStatement = mapOf(
-            Pair(BindType.Anim, "%{SOURCE}.getResource().getAnimation(%{RES_ID})"),
-            // Pair(BindType.Array, "%{SOURCE}.getResource().getIntArray(%{RES_ID})"),
-            Pair(BindType.Bool, "%{SOURCE}.getResource().getBool(%{RES_ID})"),
-            Pair(BindType.Color, "%{SOURCE}.getResource().getColor(%{RES_ID}, %{THEME})"),
-            Pair(BindType.Dimen, "%{SOURCE}.getResource().getDimen(%{RES_ID})"),
-            Pair(BindType.Drawable, "%{SOURCE}.getResource().getDrawable(%{RES_ID}, %{THEME})"),
-            Pair(BindType.Float, "%{SOURCE}.getResource().getFloat(%{RES_ID})"),
-            Pair(BindType.Int, "%{SOURCE}.getResource().getInt(%{RES_ID})"),
-            Pair(BindType.String, "%{SOURCE}.getResource().getString(%{RES_ID})"),
-            Pair(BindType.View, "%{SOURCE}.findViewById(%{RES_ID})"),
-            Pair(BindType.Unknown, "")
+        Pair(BindType.Anim, "%{SOURCE}.getResource().getAnimation(%{RES_ID})"),
+        // Pair(BindType.Array, "%{SOURCE}.getResource().getIntArray(%{RES_ID})"),
+        Pair(BindType.Bool, "%{SOURCE}.getResource().getBool(%{RES_ID})"),
+        Pair(BindType.Color, "%{SOURCE}.getResource().getColor(%{RES_ID}, %{THEME})"),
+        Pair(BindType.Dimen, "%{SOURCE}.getResource().getDimen(%{RES_ID})"),
+        Pair(BindType.Drawable, "%{SOURCE}.getResource().getDrawable(%{RES_ID}, %{THEME})"),
+        Pair(BindType.Float, "%{SOURCE}.getResource().getFloat(%{RES_ID})"),
+        Pair(BindType.Int, "%{SOURCE}.getResource().getInt(%{RES_ID})"),
+        Pair(BindType.String, "%{SOURCE}.getResource().getString(%{RES_ID})"),
+        Pair(BindType.View, "%{SOURCE}.findViewById(%{RES_ID})"),
+        Pair(BindType.Unknown, "")
     )
 
     object PsiTypes {

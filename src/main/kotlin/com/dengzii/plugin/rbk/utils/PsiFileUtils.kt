@@ -63,10 +63,10 @@ object PsiFileUtils {
                     val type = element.name
                     if (id != null) {
                         val viewInfo = BindInfo(
-                                if (type.contains(".")) type.substring(type.lastIndexOf(".") + 1) else type,
-                                id.replace(ANDROID_ID_PREFIX, ""),
-                                bindAnnotation = null,
-                                type = BindType.View
+                            if (type.contains(".")) type.substring(type.lastIndexOf(".") + 1) else type,
+                            id.replace(ANDROID_ID_PREFIX, ""),
+                            bindAnnotation = null,
+                            type = BindType.View
                         )
                         result.add(viewInfo)
                     }

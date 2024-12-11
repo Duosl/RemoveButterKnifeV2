@@ -1,9 +1,9 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin url="https://github.com/dengzii/RemoveButterKnife">
-
     <name>Remove ButterKnife</name>
     <id>com.dengzii.plugin.rbk</id>
-    <version>1.2.3</version>
-    <idea-version since-build="191.8026.42"/>
+    <version>1.2.4</version>
+<!--    <idea-version since-build="191.8026.42"/>-->
     <vendor email="dengzii@foxmail.com" url="https://github.com/dengzii">dengzi</vendor>
 
     <description>
@@ -33,7 +33,9 @@
             ]]>
     </change-notes>
 
-    <depends>com.intellij.modules.java</depends>
+    <!-- Product and plugin compatibility requirements.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+    <depends>com.intellij.modules.platform</depends>
     <depends>org.jetbrains.kotlin</depends>
 
     <actions>
@@ -51,4 +53,9 @@
         </action>
     </actions>
 
+    <!-- Extension points defined by the plugin.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+    <extensions defaultExtensionNs="com.intellij">
+
+    </extensions>
 </idea-plugin>

@@ -36,29 +36,29 @@ object Constants {
     const val ButterKnifeBindAnim = "butterknife.BindAnim"
 
     val ButterKnifeBindMethodAnnotation = arrayOf(
-            ButterKnifeOnClick,
-            ButterKnifeOnLongClick,
-            ButterKnifeOnCheckedChanged,
-            ButterKnifeOnEditorAction,
-            ButterKnifeOnFocusChange,
-            ButterKnifeOnItemClick,
-            ButterKnifeOnItemSelected,
-            ButterKnifeOnPageChange,
-            ButterKnifeOnTouch
+        ButterKnifeOnClick,
+        ButterKnifeOnLongClick,
+        ButterKnifeOnCheckedChanged,
+        ButterKnifeOnEditorAction,
+        ButterKnifeOnFocusChange,
+        ButterKnifeOnItemClick,
+        ButterKnifeOnItemSelected,
+        ButterKnifeOnPageChange,
+        ButterKnifeOnTouch
     )
 
     val ButterKnifeBindFieldAnnotation = arrayOf(
-            ButterKnifeBindView,
-            ButterKnifeBindArray,
-            ButterKnifeBindString,
-            ButterKnifeBindDrawable,
-            ButterKnifeBindBitmap,
-            ButterKnifeBindInt,
-            ButterKnifeBindFloat,
-            ButterKnifeBindViews,
-            ButterKnifeBindDimen,
-            ButterKnifeBindColor,
-            ButterKnifeBindBool,
-            ButterKnifeBindAnim
+        ButterKnifeBindView,
+        ButterKnifeBindArray,
+        ButterKnifeBindString,
+        ButterKnifeBindDrawable,
+        ButterKnifeBindBitmap,
+        ButterKnifeBindInt,
+        ButterKnifeBindFloat,
+        ButterKnifeBindViews,
+        ButterKnifeBindDimen,
+        ButterKnifeBindColor,
+        ButterKnifeBindBool,
+        ButterKnifeBindAnim
     )
 }
