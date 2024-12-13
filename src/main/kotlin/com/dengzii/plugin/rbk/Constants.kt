@@ -35,6 +35,8 @@ object Constants {
     const val ButterKnifeBindBool = "butterknife.BindBool"
     const val ButterKnifeBindAnim = "butterknife.BindAnim"
 
+    const val AndroidView = "android.view.View"
+
     val ButterKnifeBindMethodAnnotation = arrayOf(
         ButterKnifeOnClick,
         ButterKnifeOnLongClick,

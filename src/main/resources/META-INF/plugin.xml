@@ -1,14 +1,12 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin url="https://github.com/dengzii/RemoveButterKnife">
-    <name>Remove ButterKnife</name>
-    <id>com.dengzii.plugin.rbk</id>
-    <version>1.2.4</version>
-<!--    <idea-version since-build="191.8026.42"/>-->
-    <vendor email="dengzii@foxmail.com" url="https://github.com/dengzii">dengzi</vendor>
+    <name>Remove ButterKnife V2</name>
+    <id>com.duosl.plugin.rbk</id>
+    <vendor email="duoshilin@126.com" url="https://github.com/Duosl">Duosl</vendor>
 
     <description>
         <![CDATA[
-        <h2>Remove ButterKnife</h2>
+        <h2>Remove ButterKnife V2</h2>
         <br>
         <b>Remove ButterKnife binding annotations, generate `bindView` method and `findViewById` instead.</b>
         <br>
@@ -17,12 +15,12 @@
         1. In Code Editor > Right Mouse button > Refactor > Remove ButterKnife <br>
         2. In Project View > Right Mouse Button > Remove ButterKnife in Directory <br>
         <br>
-        <a href="https://github.com/dengzii/RemoveButterKnife">Source Code</a>
+        <a href="https://github.com/Duosl/RemoveButterKnifeV2">Source Code</a>
         <br>
-        <a href="https://github.com/dengzii/RemoveButterKnife/issues/new">Feedback or Bug Report</a>
+        <a href="https://github.com/Duosl/RemoveButterKnifeV2/issues/new">Feedback or Bug Report</a>
         <br>
         <br>
-        <img src='https://raw.githubusercontent.com/dengzii/RemoveButterKnife/main/art/screen_cap.gif'/>
+        <img src='https://github.com/Duosl/RemoveButterKnifeV2/blob/main/art/screen_cap.gif'/>
         ]]>
     </description>
 

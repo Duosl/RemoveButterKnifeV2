@@ -27,7 +27,8 @@ object NotificationUtils {
         return Notification(groupId, null, NotificationType.INFORMATION).also {
             it.setContent(msg)
             it.setTitle(title)
-            Notifications.Bus.notify(it, null)
+            it.isImportant = true
+            // Notifications.Bus.notify(it, null)
         }
     }
 
@@ -36,7 +37,7 @@ object NotificationUtils {
             it.setContent(msg)
             it.setTitle(title)
             it.isImportant = true
-            Notifications.Bus.notify(it, null)
+            // Notifications.Bus.notify(it, null)
         }
     }
 
@@ -44,7 +45,8 @@ object NotificationUtils {
         return Notification(groupId, null, NotificationType.WARNING).also {
             it.setContent(msg)
             it.setTitle(title)
-            Notifications.Bus.notify(it, null)
+            it.isImportant = true
+            // Notifications.Bus.notify(it, null)
         }
     }
 

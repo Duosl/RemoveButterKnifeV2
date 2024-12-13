@@ -4,8 +4,8 @@ plugins {
     id("org.jetbrains.intellij") version "1.17.4"
 }
 
-group = "com.dengzii.plugin.rbk"
-version = "1.2.4"
+group = "com.duosl.plugin.rbk"
+version = "2.0.0"
 
 repositories {
     mavenCentral()

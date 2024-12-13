@@ -13,6 +13,7 @@ class BindInfo(
     val idResExpr: String,
     var filedName: String = genMappingField(idResExpr),
     var type: BindType,
+    // 是事件绑定
     var isEventBind: Boolean = false,
     var enable: Boolean = true,
     var optional: Boolean = false,
@@ -42,4 +43,10 @@ class BindInfo(
             return builder.toString()
         }
     }
+
+    override fun toString(): String {
+        return "BindInfo(viewClass='$viewClass', idResExpr='$idResExpr', filedName='$filedName', type=$type, isEventBind=$isEventBind, enable=$enable, optional=$optional, bindAnnotation=$bindAnnotation, bindMethod=$bindMethod, refactorSuccess=$refactorSuccess, bindView=$bindView)"
+    }
+
+
 }

@@ -1,9 +1,7 @@
 package com.dengzii.plugin.rbk
 
-import com.dengzii.plugin.rbk.gen.CodeWriter
 import com.dengzii.plugin.rbk.ui.MainDialog
 import com.dengzii.plugin.rbk.utils.ButterKnifeUtils
-import com.dengzii.plugin.rbk.utils.getDeclaredClass
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
@@ -24,18 +22,12 @@ class MainAction : AnAction() {
             return
         }
         Config.PsiTypes.init(project!!)
-        val psiClass = psiFile!!.getDeclaredClass().firstOrNull() ?: return
 
-        if (!ButterKnifeUtils.isImportedButterKnife(psiFile)) {
-            return
-        }
-        MainDialog.show_ {
-            val bindInfo = ButterKnifeUtils.getButterKnifeViewBindInfo(psiClass)
-            if (bindInfo.isEmpty()) {
-                return@show_
+        MainDialog.show_(object : MainDialog.Callback {
+            override fun ok() {
+                ButterKnifeUtils.runRemoveButterKnifeTask(project, psiFile!!)
             }
-            CodeWriter.run(psiClass, bindInfo)
-        }
+        })
     }
 
     override fun update(e: AnActionEvent) {
