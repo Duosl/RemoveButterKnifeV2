@@ -135,6 +135,11 @@ object ButterKnifeUtils {
     fun runRemoveButterKnifeTask(project: Project, psiFile: PsiFile) {
         val task = object : Task.Backgroundable(project, "RemoveButterKnife") {
             override fun run(indicator: ProgressIndicator) {
+                if (!isImportedButterKnife(psiFile)) {
+                    Logger.warn("[${psiFile.name}]: The current file does not use the ButterKnife.")
+                    NotificationUtils.showWarning("[${psiFile.name}]: The current file does not use the ButterKnife.", "Remove ButterKnife")
+                    return
+                }
                 doRemoveButterKnife(psiFile)
                 indicator.text = psiFile.name
                 NotificationUtils.showInfo("Refactor complete, one files are affected", "Remove ButterKnife")
@@ -157,38 +162,43 @@ object ButterKnifeUtils {
                 }
                 Logger.info("Find ${psiFiles.size} java files")
 
-                val failList = mutableListOf<String>()
+                val errorList = mutableListOf<String>()
                 val allFileCount = psiFiles.size
+                var successCount = 0
+                var skinCount = 0
                 psiFiles.forEachIndexed { index, psiFile ->
                     try {
+                        if (!isImportedButterKnife(psiFile)) {
+                            Logger.warn("[${psiFile.name}]: The current file does not use the ButterKnife.")
+                            skinCount++
+                        }
                         doRemoveButterKnife(psiFile)
+                        successCount++
                     } catch (e: Throwable) {
                         Logger.error("Remove ButterKnife failed, file: ${psiFile.name}, error: ${e.message}")
-                        failList.add(psiFile.name)
+                        errorList.add(psiFile.name)
                     }
                     indicator.fraction = (index + 1 / allFileCount).toDouble()
                     indicator.text = "[${index + 1}/${allFileCount}] ${psiFile.name}"
                 }
                 NotificationUtils.showInfo(
-                    "Refactor complete, ${allFileCount} files are affected. success: ${allFileCount - failList.size}, fail: ${failList.size}.",
+                    "Refactor complete, $allFileCount files are affected. success: ${successCount}, skin: ${skinCount}, error: ${errorList.size}.",
                     "Remove ButterKnife"
                 )
-                if (failList.size > 0) {
-                    NotificationUtils.showError("Fails files: \n ${failList.joinToString("\n")}")
+                if (errorList.size > 0) {
+                    NotificationUtils.showError("Fails files: \n ${errorList.joinToString("\n")}")
                 }
             }
         }
         ProgressManager.getInstance().runProcessWithProgressAsynchronously(task, BackgroundableProcessIndicator(task))
     }
 
+    /**
+     * 移除 psiFile 中 ButterKnife 相关代码
+     */
     private fun doRemoveButterKnife(psiFile: PsiFile) {
         val psiClass = psiFile.getDeclaredClass().firstOrNull() ?: return
 
-        // Logger.info("[${psiFile.name}]: start check...")
-        if (!isImportedButterKnife(psiFile)) {
-            Logger.warn("[${psiFile.name}]: The current file does not use the ButterKnife.")
-            return
-        }
         val bindInfos = getButterKnifeViewBindInfo(psiClass)
         if (bindInfos.isEmpty()) {
             Logger.warn("[${psiFile.name}]: No usage butterknife.bindXXX found in current file.")

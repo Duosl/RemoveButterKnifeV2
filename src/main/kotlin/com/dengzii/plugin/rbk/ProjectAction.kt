@@ -22,18 +22,6 @@ class ProjectAction : AnAction() {
         })
     }
 
-    private fun doEachFile(virtualFile: VirtualFile, list: MutableList<VirtualFile>) {
-        if (virtualFile.valid()) {
-            if (virtualFile.isDirectory) {
-                virtualFile.children.forEach {
-                    doEachFile(it, list)
-                }
-            } else {
-                list.add(virtualFile)
-            }
-        }
-    }
-
     override fun update(e: AnActionEvent) {
         super.update(e)
 

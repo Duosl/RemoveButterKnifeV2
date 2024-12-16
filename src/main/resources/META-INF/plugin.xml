@@ -26,9 +26,14 @@
 
     <change-notes>
         <![CDATA[
-            1.2.1 (2020-12-25)<br>
-            Support multiple file refactor.<br>
-            ]]>
+            <h3>2.0.0 (2024-12-13)</h3>
+                <li>项目重构，功能细节优化</li>
+            <br/>
+            <hr>
+            <h3>1.2.1 (2020-12-25)</h3>
+                <li>支持文件夹操作</li>
+            <br/>
+        ]]>
     </change-notes>
 
     <!-- Product and plugin compatibility requirements.
