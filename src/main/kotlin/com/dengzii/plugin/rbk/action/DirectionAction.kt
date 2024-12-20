@@ -1,14 +1,14 @@
-package com.dengzii.plugin.rbk
+package com.dengzii.plugin.rbk.action
 
+import com.dengzii.plugin.rbk.Config
 import com.dengzii.plugin.rbk.ui.MainDialog
 import com.dengzii.plugin.rbk.utils.ButterKnifeUtils
 import com.dengzii.plugin.rbk.utils.valid
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
-import com.intellij.openapi.vfs.VirtualFile
 
-class ProjectAction : AnAction() {
+class DirectionAction : AnAction() {
 
     override fun actionPerformed(e: AnActionEvent) {
         val project = e.project ?: return

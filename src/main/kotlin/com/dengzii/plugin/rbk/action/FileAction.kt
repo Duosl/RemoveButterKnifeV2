@@ -1,6 +1,9 @@
-package com.dengzii.plugin.rbk
+package com.dengzii.plugin.rbk.action
 
+import com.dengzii.plugin.rbk.Config
+import com.dengzii.plugin.rbk.Constants
 import com.dengzii.plugin.rbk.ui.MainDialog
+import com.dengzii.plugin.rbk.ui.SimpleDialog
 import com.dengzii.plugin.rbk.utils.ButterKnifeUtils
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
@@ -10,7 +13,7 @@ import com.intellij.openapi.actionSystem.CommonDataKeys
  *
  * @author https://github.com/dengzii
  */
-class MainAction : AnAction() {
+class FileAction : AnAction() {
 
     override fun actionPerformed(e: AnActionEvent) {
 
@@ -23,11 +26,12 @@ class MainAction : AnAction() {
         }
         Config.PsiTypes.init(project!!)
 
-        MainDialog.show_(object : MainDialog.Callback {
-            override fun ok() {
-                ButterKnifeUtils.runRemoveButterKnifeTask(project, psiFile!!)
-            }
-        })
+        // MainDialog.show_(object : MainDialog.Callback {
+        //     override fun ok() {
+        //         ButterKnifeUtils.runRemoveButterKnifeTask(project, psiFile!!)
+        //     }
+        // })
+        SimpleDialog(project).show()
     }
 
     override fun update(e: AnActionEvent) {

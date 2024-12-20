@@ -48,14 +48,14 @@
 
     <actions>
         <action id="com.dengzii.plugn.rbk.main"
-                class="com.dengzii.plugin.rbk.MainAction"
+                class="com.dengzii.plugin.rbk.action.FileAction"
                 text="Remove ButterKnife"
                 description="Remove ButterKnife and generate findViewById">
             <add-to-group group-id="RefactoringMenu" anchor="last"/>
             <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt 5"/>
         </action>
         <action id="com.dengzii.plugn.rbk.project"
-                class="com.dengzii.plugin.rbk.ProjectAction"
+                class="com.dengzii.plugin.rbk.action.DirectionAction"
                 text="Remove ButterKnife in Directory">
             <add-to-group group-id="ProjectViewPopupMenuRefactoringGroup" anchor="last"/>
         </action>

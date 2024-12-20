@@ -2,13 +2,16 @@ plugins {
     id("java")
     id("org.jetbrains.kotlin.jvm") version "1.9.25"
     id("org.jetbrains.intellij") version "1.17.4"
+    id("org.jetbrains.compose") version "1.7.3"
 }
 
 group = "com.duosl.plugin.rbk"
 version = "2.0.2"
 
 repositories {
+    google()
     mavenCentral()
+    maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
 }
 
 // Configure Gradle IntelliJ Plugin
@@ -22,6 +25,11 @@ intellij {
         "com.intellij.java",
         "org.jetbrains.kotlin",
     ))
+}
+
+dependencies {
+    // 添加 Compose Desktop 需要的依赖项，compose.desktop.currentOs 这个 value 便来自于上面添加的 org.jetbrains.compose 插件
+    implementation(compose.desktop.currentOs)
 }
 
 tasks {
