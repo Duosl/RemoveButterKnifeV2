@@ -15,6 +15,7 @@ object Config {
     var addPrivateModifier = true
     var priorityReplaceButterKnifeBind = false
     var insertCallBindViewToFirstLine = false
+    val excludeFiles = arrayOf("*_ViewBinding", "R.java", "R2.java", "BR.java")
 
     // Insert the call bindView method statement into the first matching method in the list below.
     var insertBindViewMethodIntoMethod = mutableListOf("onCreate", "onCreateView")
@@ -39,8 +40,8 @@ object Config {
     object PsiTypes {
 
         val androidView by lazy { findByName("android.view.View") }
-        val androidActivity by lazy { findByName("android.content.Activity") }
-        val androidFragment by lazy { findByName("android.content.Fragment") }
+        val androidActivity by lazy { findByName("android.app.Activity") }
+        val androidFragment by lazy { findByName("android.app.Fragment") }
         val androidXFragment by lazy { findByName("androidx.fragment.app.Fragment") }
         val androidDialog by lazy { findByName("android.app.Dialog") }
 

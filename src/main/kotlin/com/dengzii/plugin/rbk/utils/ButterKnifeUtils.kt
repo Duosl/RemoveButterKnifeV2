@@ -2,6 +2,7 @@ package com.dengzii.plugin.rbk.utils
 
 import com.dengzii.plugin.rbk.BindInfo
 import com.dengzii.plugin.rbk.BindType
+import com.dengzii.plugin.rbk.Config
 import com.dengzii.plugin.rbk.Constants
 import com.dengzii.plugin.rbk.gen.CodeWriter
 import com.intellij.ide.highlighter.JavaFileType
@@ -15,7 +16,6 @@ import com.intellij.psi.*
 import com.intellij.psi.impl.source.tree.java.PsiArrayInitializerMemberValueImpl
 import com.intellij.psi.impl.source.tree.java.PsiIdentifierImpl
 import com.intellij.psi.impl.source.tree.java.PsiReferenceExpressionImpl
-import org.jetbrains.kotlin.idea.KotlinFileType
 
 object ButterKnifeUtils {
 
@@ -153,16 +153,15 @@ object ButterKnifeUtils {
             override fun run(indicator: ProgressIndicator) {
 
                 indicator.text = "Find all Java file..."
-                val allFile = mutableListOf<VirtualFile>()
-                virtualFile.directions(allFile)
-                val psiFiles = allFile.filter {
-                    it.fileType is JavaFileType || it.fileType is KotlinFileType
+                val psiFiles = virtualFile.files().filter {
+                    it.fileType is JavaFileType || !isExcludedFile(it.name)
+                    // it.fileType is JavaFileType || it.fileType is KotlinFileType
                 }.mapNotNull {
                     PsiManager.getInstance(project).findFile(it)
                 }
                 Logger.info("Find ${psiFiles.size} java files")
 
-                val errorList = mutableListOf<String>()
+                val errorList = mutableListOf<Pair<String, String>>()
                 val allFileCount = psiFiles.size
                 var successCount = 0
                 var skinCount = 0
@@ -175,8 +174,7 @@ object ButterKnifeUtils {
                         doRemoveButterKnife(psiFile)
                         successCount++
                     } catch (e: Throwable) {
-                        Logger.error("Remove ButterKnife failed, file: ${psiFile.name}, error: ${e.message}")
-                        errorList.add(psiFile.name)
+                        errorList.add(Pair(psiFile.name, e.message ?: e.toString()))
                     }
                     indicator.fraction = (index + 1 / allFileCount).toDouble()
                     indicator.text = "[${index + 1}/${allFileCount}] ${psiFile.name}"
@@ -187,10 +185,25 @@ object ButterKnifeUtils {
                 )
                 if (errorList.size > 0) {
                     NotificationUtils.showError("Fails files: \n ${errorList.joinToString("\n")}")
+                    Logger.error("Remove ButterKnife failed files: ")
+                    errorList.forEach {
+                        Logger.error("[${it.first}]: ${it.second}")
+                    }
                 }
             }
         }
         ProgressManager.getInstance().runProcessWithProgressAsynchronously(task, BackgroundableProcessIndicator(task))
+    }
+
+    private fun isExcludedFile(fileName: String): Boolean {
+        Config.excludeFiles.forEach {
+            if (fileName.contains('*') && fileName.contains(it)) {
+                return true
+            } else if (fileName.equals(it)) {
+                return true
+            }
+        }
+        return false
     }
 
     /**
@@ -201,7 +214,7 @@ object ButterKnifeUtils {
 
         val bindInfos = getButterKnifeViewBindInfo(psiClass)
         if (bindInfos.isEmpty()) {
-            Logger.warn("[${psiFile.name}]: No usage butterknife.bindXXX found in current file.")
+            Logger.warn("[${psiFile.name}]: No usage ButterKnife.bind() found in current file.")
             return
         }
         Logger.info("[${psiFile.name}]: All bind count: ${bindInfos.size}, event bind count: ${bindInfos.filter { it.isEventBind }.size}")
