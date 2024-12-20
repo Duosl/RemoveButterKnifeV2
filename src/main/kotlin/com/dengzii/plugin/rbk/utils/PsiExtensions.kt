@@ -5,11 +5,23 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.psi.*
 
-fun VirtualFile.directions(list: MutableList<VirtualFile>, ) {
+/**
+ * 获取当前目录下所以的文件
+ */
+fun VirtualFile.files(): List<VirtualFile> {
+    val list = mutableListOf<VirtualFile>()
+    files(list)
+    return list
+}
+
+/**
+ * 递归获取当前目录下的所有文件
+ */
+fun VirtualFile.files(list: MutableList<VirtualFile>, ) {
     if (!valid()) return
 
     if (isDirectory) {
-        children.forEach { it.directions(list) }
+        children.forEach { it.files(list) }
     } else {
         list.add(this)
     }

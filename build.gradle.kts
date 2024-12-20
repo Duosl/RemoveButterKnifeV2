@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "com.duosl.plugin.rbk"
-version = "2.0.1"
+version = "2.0.2"
 
 repositories {
     mavenCentral()
@@ -19,7 +19,8 @@ intellij {
     type.set("IC") // Target IDE Platform
 
     plugins.set(listOf(
-        "java","Kotlin"
+        "com.intellij.java",
+        "org.jetbrains.kotlin",
     ))
 }
 
@@ -34,7 +35,7 @@ tasks {
     }
 
     patchPluginXml {
-        sinceBuild.set("241")
+        sinceBuild.set("232")
         untilBuild.set("243.*")
     }
 

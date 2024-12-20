@@ -9,6 +9,10 @@
         <h2>Remove ButterKnife V2</h2>
         <br>
         <b>Remove ButterKnife binding annotations, generate `bindView` method and `findViewById` instead.</b>
+        <b>删除 ButterKnife 绑定注释，生成 `bindView` 方法和 `findViewById` 来代替。</b>
+        <li> Support Java files. 支持 Java 文件。 </li>
+        <li> Support @BindView and @OnClick annotations. 支持 @BindView and @OnClick 注解。 </li>
+        <li> Automatically delete butterknife.* import. 自动删除 butterknife 相关导包。 </li>
         <br>
         <br>
         <b>Usage</b><br>
@@ -26,7 +30,7 @@
 
     <change-notes>
         <![CDATA[
-            <h3>2.0.0 (2024-12-13)</h3>
+            <h3>2.0 (2024-12-13)</h3>
                 <li>项目重构，功能细节优化</li>
             <br/>
             <hr>
@@ -39,6 +43,7 @@
     <!-- Product and plugin compatibility requirements.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
     <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.java</depends>
     <depends>org.jetbrains.kotlin</depends>
 
     <actions>
