@@ -1,30 +1,30 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
-<idea-plugin url="https://github.com/dengzii/RemoveButterKnife">
+<idea-plugin url="https://github.com/Duosl/RemoveButterKnifeV2">
     <name>Remove ButterKnife V2</name>
     <id>com.duosl.plugin.rbk</id>
     <vendor email="duoshilin@126.com" url="https://github.com/Duosl">Duosl</vendor>
 
     <description>
         <![CDATA[
-        <h2>Remove ButterKnife V2</h2>
-        <br>
-        <b>Remove ButterKnife binding annotations, generate `bindView` method and `findViewById` instead.</b>
-        <b>删除 ButterKnife 绑定注释，生成 `bindView` 方法和 `findViewById` 来代替。</b>
-        <li> Support Java files. 支持 Java 文件。 </li>
-        <li> Support @BindView and @OnClick annotations. 支持 @BindView and @OnClick 注解。 </li>
-        <li> Automatically delete butterknife.* import. 自动删除 butterknife 相关导包。 </li>
-        <br>
-        <br>
-        <b>Usage</b><br>
-        1. In Code Editor > Right Mouse button > Refactor > Remove ButterKnife <br>
-        2. In Project View > Right Mouse Button > Remove ButterKnife in Directory <br>
-        <br>
-        <a href="https://github.com/Duosl/RemoveButterKnifeV2">Source Code</a>
-        <br>
-        <a href="https://github.com/Duosl/RemoveButterKnifeV2/issues/new">Feedback or Bug Report</a>
-        <br>
-        <br>
-        <img src='https://github.com/Duosl/RemoveButterKnifeV2/blob/main/art/screen_cap.gif'/>
+            <h2>Remove ButterKnife V2</h2>
+            <br>
+            <b>Remove ButterKnife binding annotations, generate `bindView` method and `findViewById` instead.</b>
+            <br>
+            <li> Support Java files. </li>
+            <li> Support @BindView and @OnClick annotations. </li>
+            <li> Automatically delete butterknife.* import. </li>
+            <br>
+            <br>
+            <b>Usage</b><br>
+            1. In Code Editor > Right Mouse button > Refactor > Remove ButterKnife <br>
+            2. In Project View > Right Mouse Button > Remove ButterKnife in Directory <br>
+            <br>
+            <a href="https://github.com/Duosl/RemoveButterKnifeV2">Source Code</a>
+            <br>
+            <a href="https://github.com/Duosl/RemoveButterKnifeV2/issues/new">Feedback or Bug Report</a>
+            <br>
+            <br>
+            <img src='https://raw.githubusercontent.com/Duosl/RemoveButterKnifeV2/refs/heads/main/art/screen_cap.gif'/>
         ]]>
     </description>
 
